@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCustomerFormController">
+   <children>
+      <TextField fx:id="txtId" layoutX="230.0" layoutY="141.0" prefHeight="25.0" prefWidth="155.0" promptText="ID" />
+      <Rectangle arcHeight="5.0" arcWidth="10.0" height="90.0" strokeType="INSIDE" strokeWidth="0.0" width="651.0" />
+      <TextField fx:id="txtname" layoutX="230.0" layoutY="185.0" prefHeight="25.0" prefWidth="155.0" promptText="Name" />
+      <TextField fx:id="txtcontactNumber" layoutX="230.0" layoutY="276.0" prefHeight="25.0" prefWidth="155.0" promptText="Contact Number" />
+      <TextField fx:id="txtAddress" layoutX="230.0" layoutY="232.0" prefHeight="25.0" prefWidth="155.0" promptText="Address" />
+      <Button layoutX="188.0" layoutY="327.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="27.0" prefWidth="76.0" style="-fx-background-color: orange;" text="Add">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="278.0" layoutY="328.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" style="-fx-background-color: green;" text="Update">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="464.0" layoutY="327.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" style="-fx-background-color: red;" text="Search">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="370.0" layoutY="328.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" style="-fx-background-color: yellow;" text="Delete">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="107.0" layoutY="20.0" prefHeight="49.0" prefWidth="401.0" text="Add  Customer  Form" textFill="#fffefe">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="88.0" layoutY="325.0" onAction="#btnClearOnAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: black;" text="Clear" textFill="#f2efef">
+         <font>
+            <Font name="Arial" size="17.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

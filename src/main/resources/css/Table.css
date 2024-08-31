@@ -1,0 +1,81 @@
+/* AnchorPane styling */
+.anchor-pane {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Rectangle styling - header background */
+.rectangle {
+    -fx-fill: #3b5998; /* A blue shade for the header background */
+}
+
+/* Label styling - for the header text */
+.label {
+    -fx-text-fill: white; /* White text color */
+    -fx-font-family: 'Arial';
+    -fx-font-size: 35px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+/* TableView styling */
+.table-view {
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-background-color: #ffffff;
+    -fx-padding: 10px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #d3d3d3;
+}
+
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to bottom, #e2e2e2, #c6c6c6);
+    -fx-padding: 5px;
+    -fx-font-weight: bold;
+    -fx-border-color: #cccccc;
+}
+
+.table-view .cell {
+    -fx-padding: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 0 0 1px 0;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+
+.table-view .cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-view .cell:even {
+    -fx-background-color: #ffffff;
+}
+
+.table-view .row-cell:selected {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
+}
+
+.table-view .row-cell:hover {
+    -fx-background-color: #e6e6e6;
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: #3b5998;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 15px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2e4370; /* Darker blue on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #1d2d50; /* Even darker blue on press */
+}
