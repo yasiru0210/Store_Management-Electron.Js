@@ -56,7 +56,7 @@ public class ViewCustomerFormController implements Initializable {
 
 
         list.add(new Customer("001","Yasiru","Panadura","0898697"));
-        list.add(new Customer("002","Kasun","Panadura","089869743"));
+        list.add(new Customer("002","Kasun","Matara","089869743"));
 
         tblcustomers.setItems(list);
 
