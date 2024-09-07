@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewCustomerFormController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="105.0" layoutY="-5.0" strokeType="INSIDE" strokeWidth="0.0" width="661.0" />
-      <Label alignment="CENTER" layoutX="117.0" layoutY="24.0" prefHeight="49.0" prefWidth="401.0" text="View Customer Form" textFill="#fffefe">
-         <font>
-            <Font name="System Bold" size="35.0" />
-         </font>
-      </Label>
-      <TableView fx:id="tblcustomers" layoutX="34.0" layoutY="110.0" prefHeight="200.0" prefWidth="591.0">
-         <columns>
-            <TableColumn fx:id="colid" prefWidth="95.0" text="ID" />
-            <TableColumn fx:id="colname" prefWidth="129.0" text="Name" />
-            <TableColumn fx:id="coladdress" prefWidth="180.0" text="Address" />
-            <TableColumn fx:id="colcontactnumber" prefWidth="186.0" text="Contact Number" />
-         </columns>
-      </TableView>
-      <Button layoutX="224.0" layoutY="347.0" mnemonicParsing="false" onAction="#btnReloadOnAction" text="Reload" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="884.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewCustomerFormController">
+
+
+   <Label layoutX="264.0" layoutY="20.0" prefHeight="35.0" prefWidth="263.0" text="VIEW CUSTOMER FORM">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tblCustomers" layoutX="75.0" layoutY="84.0" prefHeight="285.0" prefWidth="620.0">
+               <columns>
+                  <TableColumn fx:id="colId" prefWidth="70.0" text="Id" />
+                  <TableColumn fx:id="colTitle" prefWidth="41.0" text="Title" />
+                  <TableColumn fx:id="colName" prefWidth="78.0" text="Name" />
+                  <TableColumn fx:id="colDOB" prefWidth="74.0" text="DOB" />
+                  <TableColumn fx:id="colSalary" prefWidth="61.0" text="Salary" />
+                  <TableColumn fx:id="colAddress" prefWidth="74.0" text="Address" />
+                  <TableColumn fx:id="colCity" prefWidth="74.0" text="City" />
+                  <TableColumn fx:id="colProvince" prefWidth="73.0" text="Province" />
+                  <TableColumn fx:id="colPostalCode" prefWidth="75.0" text="Postal code" />
+               </columns>
+            </TableView>
+            <JFXButton layoutX="369.0" layoutY="410.0" onAction="#btnReloadOnAction" style="-fx-background-color: BLACK;" text="Reload" textFill="#fff9f9" />
 </AnchorPane>

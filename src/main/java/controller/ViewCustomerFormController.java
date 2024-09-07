@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
 
 import java.net.URL;
+import java.sql.*;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -19,26 +20,46 @@ import java.util.ResourceBundle;
 public class ViewCustomerFormController implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> coladdress;
+    private TableColumn<?, ?> colAddress;
 
     @FXML
-    private TableColumn<?, ?> colcontactnumber;
+    private TableColumn<?, ?> colCity;
 
     @FXML
-    private TableColumn<?, ?> colid;
+    private TableColumn<?, ?> colDOB;
 
     @FXML
-    private TableColumn<?, ?> colname;
+    private TableColumn<?, ?> colId;
 
     @FXML
-    private TableView<Customer> tblcustomers;
+    private TableColumn<?, ?> colName;
+
+    @FXML
+    private TableColumn<?, ?> colPostalCode;
+
+    @FXML
+    private TableColumn<?, ?> colProvince;
+
+    @FXML
+    private TableColumn<?, ?> colSalary;
+
+    @FXML
+    private TableColumn<?, ?> colTitle;
+
+    @FXML
+    private TableView<Customer> tblCustomers;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colid.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colname.setCellValueFactory(new PropertyValueFactory<>("name"));
-        coladdress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        colcontactnumber.setCellValueFactory(new PropertyValueFactory<>("contactnumber"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDOB.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
+        colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalcode"));
         loadTable();
     }
     @FXML
@@ -50,22 +71,37 @@ public class ViewCustomerFormController implements Initializable {
         ObservableList<Customer> list = FXCollections.observableArrayList();
         List<Customer> connection = DbConnection.getInstance().getConnection();
 
-        for (Customer obj : connection) {
-            list.add(obj);
+
+        try {
+            String SQL="SELECT * FROM CUSTOMER";
+            Connection connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade","root","1234");
+            PreparedStatement prst = connection1.prepareStatement(SQL);
+            ResultSet resultSet = prst.executeQuery();
+
+            while (resultSet.next()){
+                Customer customer = new Customer(
+                        resultSet.getString("CustID"),
+                        resultSet.getString("CustTitle"),
+                        resultSet.getString("CustName"),
+                        resultSet.getDate("DOB"),
+                        resultSet.getDouble("salary"),
+                        resultSet.getString("CustAddress"),
+                        resultSet.getString("City"),
+                        resultSet.getString("Province"),
+                        resultSet.getString("PostalCode")
+                );
+                System.out.println(customer);
+                list.add(customer);
+                tblCustomers.setItems(list);
+
+
+            }
+
+            System.out.println(connection1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
-
-        list.add(new Customer("001","Yasiru","Panadura","0898697"));
-        list.add(new Customer("002","Kasun","Matara","089869743"));
-
-        tblcustomers.setItems(list);
-
     }
-
-
-
-
-
-
 }
 
