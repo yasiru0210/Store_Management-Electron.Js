@@ -10,10 +10,10 @@ import java.util.Objects;
 
 public class DashBoardFormController {
 
-    public void btnAddCustomerOnAction(ActionEvent actionEvent) {
+    public void btnCustomerOnAction(ActionEvent actionEvent) {
         Stage stage = new Stage();
         try {
-            // Corrected path to the FXML file
+
             stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/add_customer_form.fxml")))));
         } catch (IOException e) {
             throw new RuntimeException("Failed to load FXML file", e);
@@ -21,14 +21,14 @@ public class DashBoardFormController {
         stage.show();
     }
 
-    public void btnViewCustomerOnAction(ActionEvent actionEvent) {
-        Stage stage = new Stage();
-        try {
-            // Corrected path to the FXML file
-            stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/view_customer_form.fxml")))));
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load FXML file", e);
-        }
-        stage.show();
+
+    public void btnOrderDetailOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnItemOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnOrdersOnAction(ActionEvent actionEvent) {
+
     }
 }
