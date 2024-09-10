@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="615.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCustomerFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="10.0" height="90.0" strokeType="INSIDE" strokeWidth="0.0" width="787.0" />
+      <Rectangle arcHeight="5.0" arcWidth="10.0" height="90.0" strokeType="INSIDE" strokeWidth="0.0" width="855.0" />
       <Button layoutX="193.0" layoutY="286.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="27.0" prefWidth="76.0" style="-fx-background-color: orange;" text="Add">
          <font>
             <Font name="Arial" size="15.0" />
@@ -35,7 +35,7 @@
             <Font name="Arial" size="15.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="188.0" layoutY="20.0" prefHeight="49.0" prefWidth="401.0" text="Customer  Form" textFill="#fffefe">
+      <Label alignment="CENTER" layoutX="188.0" layoutY="20.0" prefHeight="51.0" prefWidth="423.0" text="CUSTOMER FORM" textFill="#fffefe">
          <font>
             <Font name="System Bold" size="35.0" />
          </font>
