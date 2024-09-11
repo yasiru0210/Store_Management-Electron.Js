@@ -15,7 +15,7 @@ public class Customer {
     private String title;
     private String name;
 
-    public Customer(String id, String title, String name, Date dob, Double salary, String address, String city, String province, String postalcode) {
+    public Customer(String id, String title, String name, LocalDate dob, Double salary, String address, String city, String province, String postalcode) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -27,10 +27,12 @@ public class Customer {
         this.postalcode = postalcode;
     }
 
-    private Date dob;
+    private LocalDate dob;
     private Double salary;
     private String address;
     private String city;
     private String province;
     private String postalcode;
+
+
 }
