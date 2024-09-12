@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
+import model.Item;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -64,8 +65,6 @@ import java.util.ResourceBundle;
                     txtProvince.getText(),
                     txtPostalCode.getText());
 
-
-
             if(service.addCustomer(customer)){
                 new Alert(Alert.AlertType.INFORMATION,"Customer added!!").show();
             }else{
@@ -99,12 +98,16 @@ import java.util.ResourceBundle;
             colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
             colName.setCellValueFactory(new PropertyValueFactory<>("name"));
             colDOB.setCellValueFactory(new PropertyValueFactory<>("dob"));
+
             colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
             colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
             colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
             colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
             colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalcode"));
             loadTable();
+            tblCustomers.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+                setTextToValues((Customer) newValue);
+            }));
         }
 
         public void btnDeleteOnAction(ActionEvent actionEvent) {
@@ -125,6 +128,18 @@ import java.util.ResourceBundle;
         public void btnReloadOnAction(ActionEvent actionEvent) {
             loadTable();
         }
+
+        private void setTextToValues(Customer newValue) {
+            txtId.setText(newValue.getId());
+            txtName.setText(newValue.getName());
+            txtAddress.setText(newValue.getAddress());
+            txtSalary.setText(String.valueOf(newValue.getSalary()));
+            txtProvince.setText(newValue.getProvince());
+            txtCity.setText(newValue.getCity());
+            txtPostalCode.setText(newValue.getPostalcode());
+
+        }
+
     }
 
 

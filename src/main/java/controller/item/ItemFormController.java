@@ -84,8 +84,9 @@ public class ItemFormController implements Initializable {
 
          if( service.deleteItem(txtItem.getText())){
              new Alert(Alert.AlertType.INFORMATION,"Item is deleted!!").show();
+
          }else {
-             new Alert(Alert.AlertType.ERROR,"Item is not deleted!!!!").show();
+             new Alert(Alert.AlertType.INFORMATION,"Item is not deleted!!!!").show();
          }
 
     }
@@ -98,11 +99,23 @@ public class ItemFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        Item item = new Item(txtItem.getText(),
+                txtDescription.getText(),
+                txtPacksize.getText(),
+                Double.parseDouble(txtUnitPrice.getText()),
+                Double.parseDouble(txtQuantity.getText()));
+
+        if (service.updateItem(item)){
+            new Alert(Alert.AlertType.INFORMATION,"Item Updated!!").show();
+            loadtable();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Item Not Updated!!").show();}
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         ObservableList<Item> observableList = FXCollections.observableArrayList();
         tblItem.setItems(observableList);
         colItem.setCellValueFactory(new PropertyValueFactory<>("itemcode"));
@@ -111,6 +124,12 @@ public class ItemFormController implements Initializable {
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitprice"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         loadtable();
+        tblItem.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if(newValue!=null){
+                setTextToValues((Item) newValue);
+            }
+
+        }));
 
     }
 
@@ -126,5 +145,20 @@ public class ItemFormController implements Initializable {
         txtUnitPrice.setText(null);
         txtQuantity.setText(null);
     }
+
+    public void btnSearchOnAction(ActionEvent actionEvent) {
+
+        service.searchItem(txtItem.getText());
+    }
+    private void setTextToValues(Item newValue) {
+        txtItem.setText(newValue.getItemcode());
+        txtDescription.setText(newValue.getDescription());
+        txtPacksize.setText(newValue.getPackagesize());
+        txtUnitPrice.setText(newValue.getUnitprice().toString());
+        txtQuantity.setText(newValue.getQuantity().toString());
+
+    }
+
+
 
 }

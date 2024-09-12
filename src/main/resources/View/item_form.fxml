@@ -34,5 +34,6 @@
         </columns>
       </TableView>
       <JFXButton layoutX="284.0" layoutY="549.0" onAction="#btnReloadOnAction" style="-fx-background-color: BLACK;" text="RELOAD" textFill="WHITE" />
+      <JFXButton layoutX="475.0" layoutY="258.0" onAction="#btnSearchOnAction" style="-fx-background-color: grey;" text="SEARCH" />
    </children>
 </AnchorPane>

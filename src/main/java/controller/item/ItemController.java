@@ -1,9 +1,9 @@
 package controller.item;
 
+import Utill.CrudUtill;
 import db.DbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
 import model.Item;
 
 import java.sql.Connection;
@@ -18,17 +18,12 @@ public class ItemController implements ItemService{
         String sql="insert into item(ItemCode, Description,PackSize,UnitPrice,QtyOnHand) values (?,?,?,?,?)";
 
         try {
-            Connection connection  = DbConnection.getInstance().getConnection();
-            PreparedStatement prst = connection.prepareStatement(sql);
-            prst.setObject(1,item.getItemcode());
-            prst.setObject(2,item.getDescription());
-            prst.setObject(3,item.getPackagesize());
-            prst.setObject(4,item.getUnitprice());
-            prst.setObject(5,item.getQuantity());
-
-            return prst.executeUpdate() > 0;
-
-
+            return CrudUtill.execute(sql,
+                    item.getItemcode(),
+                    item.getDescription(),
+                    item.getPackagesize(),
+                    item.getUnitprice(),
+                    item.getQuantity());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -42,32 +37,22 @@ public class ItemController implements ItemService{
             String sql="delete from item where ItemCode='"+itemcode+"'";
             Connection connection = DbConnection.getInstance().getConnection();
             PreparedStatement prst = connection.prepareStatement(sql);
-            System.out.println(prst.executeUpdate() > 0);
+            return prst.executeUpdate()>0;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return false;
+
     }
 
     @Override
-    public boolean searchItem(String name) {
-        return false;
-    }
-
-    @Override
-    public boolean updateItem(Item item) {
-        return false;
-    }
-
-    @Override
-    public ObservableList<Item> getAll() {
-        ObservableList<Item> observableList = FXCollections.observableArrayList();
+    public boolean searchItem(String itemcode) {
         try {
-            String SQL = "Select * from item";
+            String sql="select * from item where ItemCode='"+itemcode+"'";
             Connection connection = DbConnection.getInstance().getConnection();
-            PreparedStatement prstm = connection.prepareStatement(SQL);
-            ResultSet resultSet = prstm.executeQuery();
+            PreparedStatement prst = connection.prepareStatement(sql);
+            ResultSet resultSet = prst.executeQuery();
+
             while (resultSet.next()) {
                 Item item = new Item(resultSet.getString("ItemCode"),
                         resultSet.getString("Description"),
@@ -76,8 +61,49 @@ public class ItemController implements ItemService{
                         resultSet.getDouble("QtyOnHand"));
 
                 System.out.println(item);
-                observableList.add(item);
+
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateItem(Item item) {
+        String SQL = "Update item set  Description=? ,PackSize=? , UnitPrice=? ,QtyOnHand=? where ItemCode=? ";
+        try {
+           return CrudUtill.execute(SQL,
+
+                    item.getDescription(),
+                    item.getPackagesize(),
+                    item.getUnitprice(),
+                    item.getQuantity(),
+                   item.getItemcode()
+           );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Override
+    public ObservableList<Item> getAll() {
+        String SQL="Select * from item";
+        ObservableList<Item> observableList = FXCollections.observableArrayList();
+        try {
+            ResultSet resultSet = CrudUtill.execute(SQL);
+            while(resultSet.next()){
+                observableList.add(new Item(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getDouble(4),
+                        resultSet.getDouble(5)));
+
+            }
+
             return observableList;
 
         } catch (SQLException e) {
@@ -86,3 +112,4 @@ public class ItemController implements ItemService{
 
     }
 }
+

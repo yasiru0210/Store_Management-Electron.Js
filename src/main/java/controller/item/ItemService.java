@@ -6,7 +6,7 @@ import model.Item;
 public interface ItemService {
     boolean addItem(Item item);
     boolean deleteItem(String itemcode);
-    boolean searchItem(String name);
+    boolean searchItem(String itemcode);
     boolean updateItem(Item item);
     ObservableList<Item> getAll();
 
