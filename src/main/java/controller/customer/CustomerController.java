@@ -1,10 +1,12 @@
 package controller.customer;
 
+import Utill.CrudUtill;
 import db.DbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import model.Customer;
+import model.Item;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +14,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CustomerController implements CustomerService {
+
+
+    private CustomerController() {
+    }
+
+    private static CustomerController instance;
+
+    public static CustomerController getInstance() {
+        return instance == null ? new CustomerController() : instance;
+    }
+
     @Override
     public boolean addCustomer(Customer customer) {
         try {
@@ -35,13 +48,13 @@ public class CustomerController implements CustomerService {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "SQL Error: " + e.getMessage()).show();
         }
-return false;
+        return false;
     }
 
     @Override
     public boolean deleteCustomer(String id) {
         try {
-            String SQL="delete from customer where CustID='"+id+"'";
+            String SQL = "delete from customer where CustID='" + id + "'";
             Connection connection = DbConnection.getInstance().getConnection();
             PreparedStatement prst = connection.prepareStatement(SQL);
             return prst.executeUpdate() > 0;
@@ -58,12 +71,12 @@ return false;
         ObservableList<Customer> list = FXCollections.observableArrayList();
 
         try {
-            String SQL="SELECT * FROM CUSTOMER";
-            Connection connection1 =DbConnection.getInstance().getConnection();
+            String SQL = "SELECT * FROM CUSTOMER";
+            Connection connection1 = DbConnection.getInstance().getConnection();
             PreparedStatement prst = connection1.prepareStatement(SQL);
             ResultSet resultSet = prst.executeQuery();
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Customer customer = new Customer(
                         resultSet.getString("CustID"),
                         resultSet.getString("CustTitle"),
@@ -78,7 +91,7 @@ return false;
                 System.out.println(customer);
                 list.add(customer);
             }
-           return list;
+            return list;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -92,7 +105,44 @@ return false;
     }
 
     @Override
-    public boolean serchCustomer(String name) {
-        return false;
+    public Customer serchCustomer(String id) {
+        String sql = "select * from customer where custID=?";
+        try {
+            ResultSet resultSet = CrudUtill.execute(sql, id);
+
+            while (resultSet.next()) {
+                return new Customer(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getDate(4).toLocalDate(),
+                        resultSet.getDouble(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7),
+                        resultSet.getString(8),
+                        resultSet.getString(9)
+
+
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return null;
     }
+
+    @Override
+    public ObservableList<String> getCustomerIDs() {
+        ObservableList<String> customerID = FXCollections.observableArrayList();
+        ObservableList<Customer> customerobservablelist = getall();
+        customerobservablelist.forEach(customer -> {
+            customerID.add(customer.getId());
+        });
+
+        return customerID;
+    }
+
+
 }

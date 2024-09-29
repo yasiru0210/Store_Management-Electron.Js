@@ -50,7 +50,7 @@ import java.util.ResourceBundle;
         @FXML
         private JFXTextField txtSalary;
 
-        CustomerService service=new CustomerController();
+        CustomerService service= CustomerController.getInstance();
 
         @FXML
         void btnAddOnAction(ActionEvent event) {

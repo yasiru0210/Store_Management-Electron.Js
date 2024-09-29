@@ -8,5 +8,7 @@ public interface CustomerService {
     boolean deleteCustomer(String id);
     ObservableList<Customer> getall();
     boolean updateCustomer(Customer customer);
-    boolean serchCustomer(String name);
+    Customer serchCustomer(String  customerID);
+    ObservableList<String> getCustomerIDs();
+
 }

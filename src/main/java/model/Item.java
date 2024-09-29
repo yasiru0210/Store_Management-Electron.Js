@@ -14,6 +14,7 @@ public class Item {
     private String description;
     private String packagesize;
     private Double unitprice;
-    private Double quantity;
+    private Integer quantity;
+
 
 }

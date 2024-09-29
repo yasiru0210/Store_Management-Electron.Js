@@ -5,13 +5,24 @@ import db.DbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Item;
+import model.OrderDetail;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ItemController implements ItemService{
+
+    private ItemController(){}
+
+    private static ItemController instance;
+
+    public static ItemController getInstance() {
+        return instance==null?new ItemController():instance;
+    }
+
     @Override
     public boolean addItem(Item item) {
 
@@ -46,7 +57,7 @@ public class ItemController implements ItemService{
     }
 
     @Override
-    public boolean searchItem(String itemcode) {
+    public Item searchItem(String itemcode) {
         try {
             String sql="select * from item where ItemCode='"+itemcode+"'";
             Connection connection = DbConnection.getInstance().getConnection();
@@ -54,20 +65,22 @@ public class ItemController implements ItemService{
             ResultSet resultSet = prst.executeQuery();
 
             while (resultSet.next()) {
-                Item item = new Item(resultSet.getString("ItemCode"),
+                return new Item(resultSet.getString("ItemCode"),
                         resultSet.getString("Description"),
                         resultSet.getString("PackSize"),
                         resultSet.getDouble("UnitPrice"),
-                        resultSet.getDouble("QtyOnHand"));
+                        resultSet.getInt("QtyOnHand"));
 
-                System.out.println(item);
+
 
             }
-
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return false;
+
+
+
     }
 
     @Override
@@ -100,7 +113,7 @@ public class ItemController implements ItemService{
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getDouble(4),
-                        resultSet.getDouble(5)));
+                        resultSet.getInt(5)));
 
             }
 
@@ -109,6 +122,42 @@ public class ItemController implements ItemService{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+    }
+    @Override
+    public ObservableList<String> getItemCode() {
+        ObservableList<String> itemCode = FXCollections.observableArrayList();
+        ObservableList<Item> itemObservableList = getAll();
+        itemObservableList.forEach(item -> {
+            itemCode.add(item.getItemcode());
+        });
+
+
+        return itemCode;
+    }
+
+
+    public boolean updateStock(List<OrderDetail> orderDetaillist) {
+        for(OrderDetail orderDetail:orderDetaillist){
+            try {
+                boolean isUpdate = updateStock(orderDetail);
+                if(!isUpdate){
+                    return false;
+                }else{
+                    return true;
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return false;
+    }
+
+    public boolean updateStock( OrderDetail orderDetail) throws SQLException {
+        String sql="Update item set QtyOnHand=QtyOnHand-? where ItemCode=?";
+           return CrudUtill.execute(sql,orderDetail.getOrderQTY(),orderDetail.getItemCode());
 
     }
 }

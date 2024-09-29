@@ -53,7 +53,7 @@ public class ItemFormController implements Initializable {
     @FXML
     private JFXTextField txtUnitPrice;
 
-     ItemService service=new ItemController();
+     ItemService service=ItemController.getInstance();
 
     @FXML
     void btnAddOnaction(ActionEvent event) {
@@ -61,7 +61,7 @@ public class ItemFormController implements Initializable {
                 txtDescription.getText(),
                 txtPacksize.getText(),
                 Double.parseDouble(txtUnitPrice.getText()),
-                Double.parseDouble(txtQuantity.getText()));
+                Integer.parseInt(txtQuantity.getText()));
 
 
         if( service.addItem(item)){
@@ -103,7 +103,7 @@ public class ItemFormController implements Initializable {
                 txtDescription.getText(),
                 txtPacksize.getText(),
                 Double.parseDouble(txtUnitPrice.getText()),
-                Double.parseDouble(txtQuantity.getText()));
+                Integer.parseInt(txtQuantity.getText()));
 
         if (service.updateItem(item)){
             new Alert(Alert.AlertType.INFORMATION,"Item Updated!!").show();
