@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thogakade AI Assistant</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-store"></i>
+                    <h1>Thogakade AI Assistant</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot online"></div>
+                    <span>Online</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Chat Container -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="assistant-info">
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="info">
+                        <h3>Store Assistant</h3>
+                        <p>Here to help with your store management needs</p>
+                    </div>
+                </div>
+                <button class="clear-chat-btn" id="clearChat">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Hello! I'm your Thogakade Store Assistant. I can help you with:</p>
+                        <ul>
+                            <li>Customer management queries</li>
+                            <li>Inventory and item information</li>
+                            <li>Order processing guidance</li>
+                            <li>Store analytics and reports</li>
+                            <li>General store operations</li>
+                        </ul>
+                        <p>How can I assist you today?</p>
+                    </div>
+                    <div class="message-time">Just now</div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <button class="quick-action-btn" data-action="customer-help">
+                    <i class="fas fa-users"></i>
+                    Customer Help
+                </button>
+                <button class="quick-action-btn" data-action="inventory-check">
+                    <i class="fas fa-boxes"></i>
+                    Inventory Check
+                </button>
+                <button class="quick-action-btn" data-action="order-status">
+                    <i class="fas fa-shopping-cart"></i>
+                    Order Status
+                </button>
+                <button class="quick-action-btn" data-action="reports">
+                    <i class="fas fa-chart-bar"></i>
+                    Reports
+                </button>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        placeholder="Type your message here..." 
+                        autocomplete="off"
+                    >
+                    <button class="send-btn" id="sendBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="input-actions">
+                    <button class="action-btn" id="voiceBtn">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="action-btn" id="attachBtn">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <span class="typing-text">Assistant is typing...</span>
+        </div>
+    </div>
+
+    <script src="src/scripts/main.js"></script>
+</body>
+</html>
